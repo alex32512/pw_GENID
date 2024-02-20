@@ -1,0 +1,15 @@
+Bootstrap: docker
+From: centos:7
+ 
+%post 
+        yum install -y openmpi
+
+        echo export PATH=$PATH:/opt/amazon/openmpi/bin
+
+
+%runscript
+        echo "PATH: $PATH"
+        ls -l /opt/amazon/openmpi/bin/mpirun
+        /opt/amazon/openmpi/bin/mpirun --version
+        echo "Hello World"
+        mpirun --allow-run-as-root -np 2 /hello
